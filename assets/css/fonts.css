@@ -1,0 +1,33 @@
+/* ===== Edgio — polices auto-hébergées (aucune dépendance CDN) ===== */
+
+/* Sora — display / titres */
+@font-face{
+  font-family:"Sora";font-style:normal;font-weight:600;font-display:swap;
+  src:url("../fonts/sora-latin-600-normal.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Sora";font-style:normal;font-weight:700;font-display:swap;
+  src:url("../fonts/sora-latin-700-normal.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Sora";font-style:normal;font-weight:800;font-display:swap;
+  src:url("../fonts/sora-latin-800-normal.woff2") format("woff2");
+}
+
+/* Manrope — corps de texte */
+@font-face{
+  font-family:"Manrope";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../fonts/manrope-latin-400-normal.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Manrope";font-style:normal;font-weight:500;font-display:swap;
+  src:url("../fonts/manrope-latin-500-normal.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Manrope";font-style:normal;font-weight:600;font-display:swap;
+  src:url("../fonts/manrope-latin-600-normal.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Manrope";font-style:normal;font-weight:700;font-display:swap;
+  src:url("../fonts/manrope-latin-700-normal.woff2") format("woff2");
+}
