@@ -68,7 +68,7 @@
 <!-- NAV -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="brand"><img src="logo.svg" alt="Logo Edgio" width="34" height="34"> Edgio</a>
+    <a href="#top" class="brand"><img src="logo.png" alt="Logo Edgio" width="34" height="34"> Edgio</a>
     <nav class="nav-links">
       <a href="#produit">Produit</a>
       <a href="#fonctionnalites">Fonctionnalités</a>
@@ -120,12 +120,36 @@
       </div>
     </div>
 
-    <div class="hero-visual" data-hero="5">
+    <div class="hero-visual">
       <span class="glow-ring" aria-hidden="true"></span>
-      <div class="phone" id="heroPhone">
-        <div class="phone-screen">
-          <img src="screen-global.png" alt="Vue d'ensemble de l'app Edgio : trades du jour, comptes et calendrier cumulé" width="1170" height="2532" fetchpriority="high">
+      <div class="hero-art" id="heroArt">
+        <!-- Noyau : jauge de discipline -->
+        <div class="disc-core">
+          <svg class="disc-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <defs>
+              <linearGradient id="discGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#d33cf0"/>
+                <stop offset="1" stop-color="#5638e8"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="60" cy="60" r="52"/>
+            <circle class="prog" id="discProg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="disc-center">
+            <span class="disc-flame">🔥</span>
+            <span class="disc-num">6</span>
+            <span class="disc-lbl">jours de streak</span>
+          </div>
         </div>
+
+        <!-- Signaux flottants (discipline &amp; psychologie) -->
+        <div class="chip chip-a"><span class="ok">✓</span> Règles respectées <b>4/5</b></div>
+        <div class="chip chip-b">Humeur <b>haute</b> <span class="emo">😄</span></div>
+        <div class="chip chip-c">
+          <span class="mini"><i class="w">✓</i><i class="w">✓</i><i class="l">✗</i><i class="w">✓</i><i class="w">✓</i></span>
+          Séance encadrée
+        </div>
+        <div class="chip chip-d"><span class="up">▲</span> <b>+142&nbsp;$</b> · règles suivies</div>
       </div>
     </div>
   </div>
@@ -425,7 +449,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <a href="#top" class="brand"><img src="logo.svg" alt="Logo Edgio" width="34" height="34"> Edgio</a>
+        <a href="#top" class="brand"><img src="logo.png" alt="Logo Edgio" width="34" height="34"> Edgio</a>
         <p>Le journal de trading axé discipline et psychologie. Deviens rentable en tenant tes règles, pas en collectionnant des stats.</p>
       </div>
       <div class="foot-col">

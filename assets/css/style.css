@@ -181,6 +181,46 @@ h1,h2,h3{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;l
   filter:blur(20px);
 }
 
+/* ---- Hero art : cockpit de discipline (bespoke, pas le rendu app) ---- */
+.hero-art{position:relative;width:100%;max-width:440px;aspect-ratio:1;margin:0 auto}
+.disc-core{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle at 32% 26%,rgba(211,60,240,.28),rgba(86,56,232,.10) 58%,rgba(255,255,255,.02));
+  border:1px solid var(--line-strong);backdrop-filter:blur(14px);
+  box-shadow:0 34px 90px -24px rgba(138,43,232,.55),inset 0 0 46px rgba(162,107,255,.14);
+  display:flex;align-items:center;justify-content:center;will-change:transform;
+}
+.disc-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.disc-ring .track{fill:none;stroke:rgba(255,255,255,.08);stroke-width:5}
+.disc-ring .prog{fill:none;stroke:url(#discGrad);stroke-width:6;stroke-linecap:round;stroke-dasharray:326.73;stroke-dashoffset:326.73}
+.disc-center{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1px}
+.disc-flame{font-size:1.5rem;line-height:1}
+.disc-num{font-family:var(--font-display);font-weight:800;font-size:3.4rem;line-height:1.05;background:var(--grad-soft);-webkit-background-clip:text;background-clip:text;color:transparent}
+.disc-lbl{font-size:.78rem;color:var(--dim);letter-spacing:.04em}
+
+.chip{
+  position:absolute;display:flex;align-items:center;gap:8px;
+  padding:11px 15px;border-radius:14px;
+  background:rgba(18,20,29,.72);border:1px solid var(--line-strong);backdrop-filter:blur(12px);
+  font-size:.9rem;font-weight:600;color:var(--txt);white-space:nowrap;
+  box-shadow:0 18px 44px -20px rgba(0,0,0,.85);will-change:transform;
+}
+.chip b{color:#fff;font-weight:700}
+.chip .ok{color:var(--green);font-weight:800}
+.chip .up{color:var(--green);font-size:.75rem}
+.chip .emo{font-size:1rem}
+.chip .mini{display:inline-flex;gap:3px}
+.chip .mini i{width:17px;height:17px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-style:normal;font-weight:800}
+.chip .mini .w{background:rgba(52,211,153,.14);color:var(--green);border:1px solid rgba(52,211,153,.35)}
+.chip .mini .l{background:rgba(248,113,122,.14);color:var(--red);border:1px solid rgba(248,113,122,.35)}
+.chip-a{top:4%;left:-2%;animation:floatA 6s ease-in-out infinite}
+.chip-b{top:22%;right:-4%;animation:floatB 7s ease-in-out infinite}
+.chip-c{bottom:17%;left:-6%;animation:floatB 6.6s ease-in-out infinite}
+.chip-d{bottom:2%;right:0%;animation:floatA 7.4s ease-in-out infinite}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
 /* phone component (shared) */
 .phone{
   position:relative;width:290px;aspect-ratio:1170/2532;
@@ -189,10 +229,8 @@ h1,h2,h3{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;l
   box-shadow:0 40px 90px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06),inset 0 0 0 1px rgba(255,255,255,.04);
   will-change:transform;
 }
-.phone::before{
-  content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);
-  width:66px;height:20px;background:#05060a;border-radius:100px;z-index:5;
-}
+/* Encoche retirée : les captures ont leur propre en-tête, on garde l'écran plein
+   pour ne jamais masquer le titre de l'app. */
 .phone-screen{
   position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:#0a0b10;
 }
@@ -434,7 +472,15 @@ h1,h2,h3{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;l
   .hero-cta{justify-content:center}
   .hero-trust{justify-content:center}
   .hero-badge{margin:0 auto}
-  .hero-visual{order:-1;min-height:auto;margin-bottom:20px}
+  .hero-visual{order:-1;min-height:auto;margin:8px 0 28px}
+  .hero-art{max-width:360px}
+  .disc-core{width:196px;height:196px}
+  .disc-num{font-size:2.9rem}
+  .chip{font-size:.82rem;padding:9px 12px}
+  .chip-a{left:0}
+  .chip-b{right:0}
+  .chip-c{left:0}
+  .chip-d{right:0}
   .eyebrow{justify-content:center}
   .cine-inner{grid-template-columns:1fr;gap:18px}
   .cine-phone-wrap{order:1}
