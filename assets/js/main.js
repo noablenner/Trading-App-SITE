@@ -128,25 +128,25 @@
     /* grilles animées en stagger (les enfants sont exclus du reveal générique) */
     const staggered = new Set();
     [".feat-grid", ".seg-grid", ".steps", ".faq-list"].forEach((sel) => {
-      const grid = $(sel);
-      if (!grid) return;
-      const kids = $$(".rv", grid);
-      if (!kids.length) return;
-      kids.forEach((k) => staggered.add(k));
-      ScrollTrigger.create({
-        trigger: grid,
-        start: "top 82%",
-        once: true,
-        onEnter: () => {
-          gsap.to(kids, {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.85,
-            ease: "power3.out",
-            stagger: 0.09,
-          });
-        },
+      $$(sel).forEach((grid) => {
+        const kids = $$(".rv", grid);
+        if (!kids.length) return;
+        kids.forEach((k) => staggered.add(k));
+        ScrollTrigger.create({
+          trigger: grid,
+          start: "top 82%",
+          once: true,
+          onEnter: () => {
+            gsap.to(kids, {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.85,
+              ease: "power3.out",
+              stagger: 0.09,
+            });
+          },
+        });
       });
     });
 
