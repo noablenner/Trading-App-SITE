@@ -331,6 +331,71 @@
   }
 
   /* ---------------------------------------------------------------------
+     CURSEUR BOUGIE — une chandelle verte (haussière) suit la souris
+     Desktop (pointeur fin) + motion OK uniquement ; sinon curseur natif.
+     --------------------------------------------------------------------- */
+  if (!REDUCED && window.matchMedia("(pointer:fine)").matches) {
+    const el = document.createElement("div");
+    el.className = "cursor-candle";
+    el.setAttribute("aria-hidden", "true");
+    el.innerHTML =
+      '<div class="cc-scale"><div class="cc-squash">' +
+      '<svg viewBox="0 0 20 40" xmlns="http://www.w3.org/2000/svg">' +
+      '<rect class="cc-wick" x="9" y="1" width="2" height="38" rx="1" fill="#34d399"/>' +
+      '<rect class="cc-body" x="4" y="11" width="12" height="18" rx="2.5" fill="#34d399" stroke="#8ef2cd" stroke-width="1"/>' +
+      "</svg></div></div>";
+    document.body.appendChild(el);
+    document.documentElement.classList.add("candle-cursor");
+
+    const scaleEl = $(".cc-scale", el);
+    const squashEl = $(".cc-squash", el);
+    const xTo = gsap.quickTo(el, "x", { duration: 0.12, ease: "power3" });
+    const yTo = gsap.quickTo(el, "y", { duration: 0.12, ease: "power3" });
+
+    let shown = false;
+    window.addEventListener(
+      "pointermove",
+      (e) => {
+        if (e.pointerType && e.pointerType !== "mouse") return;
+        xTo(e.clientX);
+        yTo(e.clientY);
+        if (!shown) {
+          shown = true;
+          gsap.to(el, { opacity: 1, duration: 0.25 });
+        }
+      },
+      { passive: true }
+    );
+    document.addEventListener("mouseleave", () => gsap.to(el, { opacity: 0, duration: 0.2 }));
+    document.addEventListener("mouseenter", () => {
+      if (shown) gsap.to(el, { opacity: 1, duration: 0.2 });
+    });
+
+    /* survol d'un élément cliquable → la bougie grandit */
+    const HOT = "a,button,.magnetic,.card,.qa button,.seg,.plan,[role=button]";
+    document.addEventListener("pointerover", (e) => {
+      if (e.target.closest && e.target.closest(HOT)) {
+        el.classList.add("is-hot");
+        gsap.to(scaleEl, { scale: 1.55, duration: 0.28, ease: "power3.out" });
+      }
+    });
+    document.addEventListener("pointerout", (e) => {
+      if (e.target.closest && e.target.closest(HOT)) {
+        el.classList.remove("is-hot");
+        gsap.to(scaleEl, { scale: 1, duration: 0.28, ease: "power3.out" });
+      }
+    });
+
+    /* clic → petit « squash » de bougie */
+    window.addEventListener("pointerdown", () =>
+      gsap.to(squashEl, { scaleY: 0.72, scaleX: 1.14, duration: 0.12, ease: "power2.out" })
+    );
+    window.addEventListener("pointerup", () =>
+      gsap.to(squashEl, { scaleY: 1, scaleX: 1, duration: 0.4, ease: "elastic.out(1,0.5)" })
+    );
+  }
+
+  /* ---------------------------------------------------------------------
      FAQ — accordéon
      --------------------------------------------------------------------- */
   $$(".qa").forEach((qa) => {

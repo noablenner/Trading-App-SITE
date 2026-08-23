@@ -449,6 +449,22 @@ h1,h2,h3{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;l
 .stat .val{font-family:var(--font-display);font-weight:800;font-size:clamp(2.4rem,5vw,3.4rem);background:var(--grad-soft);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em}
 .stat .lbl{color:var(--dim);font-size:.9rem;margin-top:4px}
 
+/* ---------- Curseur bougie (chandelier) ---------- */
+/* Activé par JS (classe sur <html>) uniquement en pointeur fin + motion OK ;
+   sinon le curseur natif est conservé (progressive enhancement). */
+html.candle-cursor,
+html.candle-cursor *{cursor:none!important}
+.cursor-candle{
+  position:fixed;left:0;top:0;z-index:10000;pointer-events:none;
+  width:20px;height:40px;margin-left:-10px;margin-top:-20px;
+  opacity:0;will-change:transform;
+  filter:drop-shadow(0 0 5px rgba(52,211,153,.65));
+}
+.cursor-candle .cc-scale,.cursor-candle .cc-squash{width:100%;height:100%;transform-origin:50% 50%}
+.cursor-candle svg{display:block;width:100%;height:100%}
+/* état survol d'un élément cliquable : la bougie grandit + glow accru */
+.cursor-candle.is-hot{filter:drop-shadow(0 0 9px rgba(52,211,153,.9))}
+
 /* ---------- Reveal base ---------- */
 .rv{opacity:0;transform:translateY(34px);filter:blur(6px);will-change:transform,opacity,filter}
 
