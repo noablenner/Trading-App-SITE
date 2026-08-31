@@ -80,14 +80,13 @@
   const heroItems = $$("[data-hero]").sort(
     (a, b) => +a.dataset.hero - +b.dataset.hero
   );
-  const CIRC = 2 * Math.PI * 52; // circonférence de la jauge (r=52)
-  const ring = $("#discProg");
-  const chips = $$("#heroArt .chip");
+  const heroPhone = $(".hero-stack .hero-phone");
+  const floats = $$(".hero-stack .float-shot");
 
   if (!REDUCED && heroItems.length) {
     gsap.set(heroItems, { opacity: 0, y: 34, filter: "blur(10px)" });
-    gsap.set("#heroArt .disc-core", { opacity: 0, scale: 0.85 });
-    gsap.set(chips, { opacity: 0, y: 18, scale: 0.9 });
+    if (heroPhone) gsap.set(heroPhone, { opacity: 0, y: 40, scale: 0.94 });
+    gsap.set(floats, { opacity: 0, y: 22, scale: 0.92 });
 
     const tl = gsap.timeline({ delay: 0.15, defaults: { ease: "power3.out" } });
     tl.to(heroItems, {
@@ -97,20 +96,10 @@
       duration: 0.9,
       stagger: 0.11,
     })
-      .to("#heroArt .disc-core", { opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.6)" }, 0.3)
-      .to(chips, { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12 }, 0.5);
-
-    if (ring) {
-      tl.fromTo(
-        ring,
-        { strokeDashoffset: CIRC },
-        { strokeDashoffset: CIRC * 0.15, duration: 1.5, ease: "power2.out" },
-        0.55
-      );
-    }
+      .to(heroPhone || {}, { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.25)
+      .to(floats, { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.14 }, 0.55);
   } else {
     gsap.set(heroItems, { opacity: 1, y: 0, filter: "none" });
-    if (ring) ring.style.strokeDashoffset = (CIRC * 0.15).toFixed(2);
   }
 
   /* ---------------------------------------------------------------------
