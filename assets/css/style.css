@@ -243,7 +243,6 @@ h1,h2,h3{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;l
 }
 .cine-state .tags span.win{color:var(--green);border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)}
 .cine-state .tags span.loss{color:var(--red);border-color:rgba(248,113,122,.3);background:rgba(248,113,122,.08)}
-.cine-state-shot{display:none}
 
 .cine-phone-wrap{display:flex;justify-content:center;perspective:1400px}
 .cine-phone{width:300px;will-change:transform}
@@ -453,22 +452,14 @@ html.candle-cursor *{cursor:none!important}
   .chip-c{left:0}
   .chip-d{right:0}
   .eyebrow{justify-content:center}
-  .cine-pin{height:auto;display:block;padding:70px 0}
-  .cine-inner{display:block}
-  .cine-copy{position:static;min-height:auto;text-align:center}
-  .cine-phone-wrap{display:none}
-  .cine-progress{display:none}
-  .cine-state{
-    position:static;opacity:0;transform:translateY(24px);
-    display:flex;flex-direction:column;align-items:center;
-    margin-bottom:64px;
-  }
-  .cine-state:last-child{margin-bottom:0}
-  .cine-state h3{font-size:1.6rem}
-  .cine-state p{margin:0 auto;font-size:1rem}
+  .cine-inner{grid-template-columns:1fr;gap:14px}
+  .cine-phone-wrap{order:1}
+  .cine-copy{order:2;min-height:250px;text-align:center}
+  .cine-phone{width:132px}
+  .cine-state{align-items:center}
+  .cine-state h3{font-size:1.5rem}
+  .cine-state p{margin:0 auto;font-size:.95rem}
   .cine-state .tags{justify-content:center}
-  .cine-state-shot{display:block;margin-top:32px}
-  .cine-state-shot .phone{width:216px}
 }
 @media(max-width:600px){
   .wrap{padding:0 18px}
