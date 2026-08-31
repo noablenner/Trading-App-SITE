@@ -437,29 +437,32 @@ html.candle-cursor *{cursor:none!important}
   .nav-links{display:none}
   .nav-cta .btn-ghost{display:none}
   .burger{display:flex}
+  .nav-inner{height:56px}
+  .brand{font-size:1.05rem;gap:8px}
+  .brand img{width:26px;height:26px;border-radius:7px}
+  .nav-cta{gap:10px}
+  .nav-cta .btn{padding:8px 16px;font-size:.85rem}
+  .burger{width:36px;height:36px;border-radius:10px}
+  .burger span{width:15px}
+  .mobile-menu{inset:56px 0 auto 0}
+  .hero{padding:90px 0 60px}
   .hero-inner{grid-template-columns:1fr;gap:10px;text-align:center}
   .hero p.lead{margin-left:auto;margin-right:auto}
   .hero-cta{justify-content:center}
   .hero-trust{justify-content:center}
   .hero-badge{margin:0 auto}
-  .hero-visual{order:1;min-height:auto;margin:34px 0 8px}
-  .hero-art{max-width:360px}
-  .disc-core{width:196px;height:196px}
-  .disc-num{font-size:2.9rem}
-  .chip{font-size:.82rem;padding:9px 12px}
-  .chip-a{left:0}
-  .chip-b{right:0}
-  .chip-c{left:0}
-  .chip-d{right:0}
+  .hero-visual{order:-1;min-height:auto;margin:4px 0 20px}
   .eyebrow{justify-content:center}
+  .cine-pin{flex-direction:column;justify-content:center;padding:32px 0}
   .cine-inner{grid-template-columns:1fr;gap:14px}
   .cine-phone-wrap{order:1}
-  .cine-copy{order:2;min-height:250px;text-align:center}
-  .cine-phone{width:132px}
+  .cine-copy{order:2;min-height:230px;text-align:center}
+  .cine-phone{width:110px}
   .cine-state{align-items:center}
-  .cine-state h3{font-size:1.5rem}
-  .cine-state p{margin:0 auto;font-size:.95rem}
+  .cine-state h3{font-size:1.4rem}
+  .cine-state p{margin:0 auto;font-size:.92rem}
   .cine-state .tags{justify-content:center}
+  .cine-progress{position:static;transform:none;margin-top:22px}
 }
 @media(max-width:600px){
   .wrap{padding:0 18px}
@@ -676,8 +679,8 @@ html.candle-cursor *{cursor:none!important}
   .road-grid{grid-template-columns:1fr}
   .plat-grid{grid-template-columns:1fr}
   .plat-shot{grid-column:auto}
-  .hero-stack{max-width:280px;padding:0}
-  .hero-stack .hero-phone{width:225px}
+  .hero-stack{max-width:210px;padding:0}
+  .hero-stack .hero-phone{width:170px}
   .float-shot{display:none}
   .row .shot img{max-height:340px}
   .shot-bar span{display:none}
