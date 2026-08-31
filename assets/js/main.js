@@ -213,15 +213,14 @@
     if (REDUCED) {
       states.forEach((s) => gsap.set(s, { opacity: 1, y: 0 }));
     } else {
+      gsap.set(states, { opacity: 0, y: 30 });
+      gsap.set(states[0], { opacity: 1, y: 0 });
+      gsap.set(imgs, { opacity: 0 });
+      gsap.set(imgs[0], { opacity: 1 });
+
       const mm = gsap.matchMedia();
 
-      /* Desktop/tablette : narration pinnée, un seul téléphone qui change d'écran. */
-      mm.add("(min-width: 821px)", () => {
-        gsap.set(states, { opacity: 0, y: 30 });
-        gsap.set(states[0], { opacity: 1, y: 0 });
-        gsap.set(imgs, { opacity: 0 });
-        gsap.set(imgs[0], { opacity: 1 });
-
+      const build = (rotate) => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: cinePin,
@@ -235,11 +234,11 @@
           defaults: { ease: "power2.inOut" },
         });
 
-        /* trajectoire continue du téléphone, légère rotation 3D */
+        /* trajectoire continue du téléphone (3D sur desktop) */
         tl.fromTo(
           cinePhone,
-          { rotateY: -9, rotateX: 4, scale: 0.95, y: 24 },
-          { rotateY: 9, rotateX: -3, scale: 1, y: -16, duration: 3, ease: "none" },
+          { rotateY: rotate ? -9 : 0, rotateX: rotate ? 4 : 0, scale: 0.95, y: 24 },
+          { rotateY: rotate ? 9 : 0, rotateX: rotate ? -3 : 0, scale: 1, y: -16, duration: 3, ease: "none" },
           0
         );
 
@@ -260,22 +259,16 @@
         tl.fromTo(segs[1], { scaleX: 0 }, { scaleX: 1, transformOrigin: "left", duration: 1 }, 1);
         tl.fromTo(segs[2], { scaleX: 0 }, { scaleX: 1, transformOrigin: "left", duration: 1 }, 2);
 
+        return tl;
+      };
+
+      mm.add("(min-width: 821px)", () => {
+        const tl = build(true);
         return () => tl.scrollTrigger && tl.scrollTrigger.kill();
       });
-
-      /* Mobile : pas de pin (évite que le téléphone masque le texte qui défile).
-         Chaque état garde sa propre capture et apparaît normalement au scroll. */
       mm.add("(max-width: 820px)", () => {
-        gsap.set(states, { opacity: 0, y: 24 });
-        const triggers = states.map((s) =>
-          ScrollTrigger.create({
-            trigger: s,
-            start: "top 85%",
-            once: true,
-            onEnter: () => gsap.to(s, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }),
-          })
-        );
-        return () => triggers.forEach((t) => t.kill());
+        const tl = build(false); // version allégée : pas de rotation 3D, téléphone réduit en CSS
+        return () => tl.scrollTrigger && tl.scrollTrigger.kill();
       });
     }
   }
