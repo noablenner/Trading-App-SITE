@@ -522,7 +522,7 @@ const renderFeed = (posts) => `<?xml version="1.0" encoding="UTF-8"?>
 <atom:link href="${SITE}/blog/feed.xml" rel="self" type="application/rss+xml"/>
 <description>Articles de fond sur la psychologie du trader, la discipline d'exécution et le journal de trading.</description>
 <language>fr-FR</language>
-<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+<lastBuildDate>${new Date(`${posts[0]?.date_maj || posts[0]?.date_publication || '1970-01-01'}T08:00:00Z`).toUTCString()}</lastBuildDate>
 ${posts.map((p) => `<item>
 <title>${esc(p.titre)}</title>
 <link>${SITE}/blog/posts/${p.slug}.html</link>
