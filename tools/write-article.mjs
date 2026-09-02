@@ -48,9 +48,19 @@ raconte ce qu'il a vu, jamais comme un rédacteur qui résume le web.
 
 INTERDITS ABSOLUS — un seul suffit à rendre l'article inutilisable :
 - Inventer une statistique, un pourcentage, une étude, un chiffre de marché ou une source.
-  Aucune exception. Si tu ne sais pas, tu n'écris pas de chiffre. Les seuls chiffres autorisés
-  sont ceux de la méthode elle-même (un seuil de règle, un nombre de trades, un montant en R,
-  une durée), présentés comme des repères de méthode et non comme des faits mesurés.
+  Aucune exception, et c'est la faute qui revient le plus souvent : tu ne disposes d'aucune
+  donnée vérifiable sur les traders, les prop firms ou les taux de réussite, donc tu n'en
+  écris aucune. Sont interdits, même en les présentant comme des ordres de grandeur ou en
+  écrivant « environ », « la plupart » ou « une grande partie » : tout pourcentage portant sur
+  des personnes, tout « X sur Y », tout taux d'échec ou de réussite, toute étude, toute
+  recherche, tout chiffre attribué à un secteur ou à une plateforme.
+  Écris le mécanisme à la place du chiffre. « La majorité des comptes sautent le dernier
+  jour » est interdit ; « le dernier jour concentre le risque, et voici pourquoi » est ce
+  qu'on attend.
+  Les seuls chiffres autorisés sont ceux de la méthode elle-même — un seuil de règle, un
+  nombre de trades, un montant en R, une durée, un pourcentage de drawdown fixé par un
+  règlement de prop firm — présentés comme des repères de méthode, jamais comme des faits
+  mesurés sur une population.
 - Toute promesse de gain, tout rendement, tout signal, tout conseil d'investissement.
 - Les emoji, les points d'exclamation, les hashtags.
 - Les formules creuses : « dans le monde du trading », « il est important de », « dans cet
@@ -106,6 +116,18 @@ export const PlanSchema = z.object({
  * Remplace la relecture humaine. Chaque règle correspond à une faute qui, sur un
  * sujet financier, coûte plus cher que de sauter une publication.
  */
+/** Phrase complète contenant l'index donné : un fragment isolé ne dit pas au
+ *  modèle quoi corriger, la phrase entière si. */
+function phraseAutour(texte, index) {
+  const debut = Math.max(
+    texte.lastIndexOf('.', index) + 1,
+    texte.lastIndexOf('\n', index) + 1,
+  );
+  let fin = texte.indexOf('.', index);
+  if (fin === -1) fin = Math.min(texte.length, index + 200);
+  return texte.slice(debut, fin + 1).trim();
+}
+
 export function controle(a, slugsExistants, motsClesExistants) {
   const p = [];
   const corps = a.corps || '';
@@ -123,7 +145,7 @@ export function controle(a, slugsExistants, motsClesExistants) {
   ];
   for (const [re, quoi] of inventions) {
     const m = corps.match(re);
-    if (m) p.push(`${quoi} : « ${m[0].trim()} »`);
+    if (m) p.push(`${quoi}, dans cette phrase : « ${phraseAutour(corps, m.index)} »`);
   }
 
   // Promesses et conseils : hors périmètre légal du site.
@@ -136,7 +158,7 @@ export function controle(a, slugsExistants, motsClesExistants) {
   ];
   for (const [re, quoi] of promesses) {
     const m = corps.match(re);
-    if (m) p.push(`${quoi} : « ${m[0].trim()} »`);
+    if (m) p.push(`${quoi}, dans cette phrase : « ${phraseAutour(corps, m.index)} »`);
   }
 
   // Forme.
