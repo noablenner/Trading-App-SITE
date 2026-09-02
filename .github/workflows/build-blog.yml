@@ -1,0 +1,51 @@
+name: Build blog
+
+# Régénère le blog statique (articles, hub, RSS, sitemap) à partir des JSON
+# déposés dans content/posts/ — à la main ou par le scénario Make
+# « EDGIO | 05 - Blog Publisher ».
+#
+# Le cron quotidien sert aux publications programmées : un article daté d'un
+# jour futur reste invisible jusqu'à sa date, puis sort tout seul.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/posts/**'
+      - 'tools/build-blog.mjs'
+      - 'assets/css/blog.css'
+  schedule:
+    - cron: '10 6 * * *'   # 08h10 Paris (heure d'été) — publications programmées
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-blog
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Générer le blog
+        run: node tools/build-blog.mjs
+
+      - name: Commit si le rendu a changé
+        run: |
+          git config user.name  "edgio-blog-bot"
+          git config user.email "contact@edgio.fr"
+          git add blog sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Aucun changement à publier."
+            exit 0
+          fi
+          git commit -m "Blog : régénération automatique du rendu statique"
+          git push

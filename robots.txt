@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Assistants de recherche générative : autorisés, le contenu est fait pour être cité.
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://edgio.fr/sitemap.xml
