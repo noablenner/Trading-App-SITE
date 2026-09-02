@@ -24,9 +24,9 @@ const GA = 'G-376LSJY2CH';
 const ADS = 'ca-pub-2762415539425860';
 
 const AUTHORS = {
-  'Noa Blenner': {
+  'Leon Banner': {
     role: "Fondateur d'Edgio, day trader sur futures",
-    bio: "Noa Blenner trade les futures indices et l'or en intraday depuis 2020. Il a créé Edgio après avoir compris que ses pertes ne venaient pas de ses setups mais de ce qu'il faisait entre deux trades. Il écrit ici à partir de son propre journal, pas de théorie.",
+    bio: "Leon Banner trade les futures indices et l'or en intraday depuis 2020. Il a créé Edgio après avoir compris que ses pertes ne venaient pas de ses setups mais de ce qu'il faisait entre deux trades. Il écrit ici à partir de son propre journal, pas de théorie.",
     url: `${SITE}/blog/a-propos.html`,
     avatar: '/logo.png',
   },
@@ -245,7 +245,7 @@ const footer = () => `
 
 function renderPost(p, all) {
   const url = `${SITE}/blog/posts/${p.slug}.html`;
-  const author = AUTHORS[p.auteur] || AUTHORS['Noa Blenner'];
+  const author = AUTHORS[p.auteur] || AUTHORS['Leon Banner'];
   const toc = headings(p.corps);
   const image = p.image ? `${SITE}${p.image}` : `${SITE}/og-image.png`;
 
@@ -452,14 +452,14 @@ ${footer()}`;
 /* ------------------------------------------------------------------ auteur */
 
 function renderAuthor(posts) {
-  const a = AUTHORS['Noa Blenner'];
+  const a = AUTHORS['Leon Banner'];
   const url = `${SITE}/blog/a-propos.html`;
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
     mainEntity: {
       '@type': 'Person',
-      name: 'Noa Blenner',
+      name: 'Leon Banner',
       url,
       jobTitle: a.role,
       description: a.bio,
@@ -468,9 +468,9 @@ function renderAuthor(posts) {
     },
   };
   return `${head({
-    title: "Qui écrit sur ce blog — Noa Blenner, fondateur d'Edgio",
+    title: "Qui écrit sur ce blog — Leon Banner, fondateur d'Edgio",
     description:
-      "Noa Blenner, fondateur d'Edgio et day trader sur futures, écrit les articles de ce blog. Expérience, méthode d'écriture et politique éditoriale.",
+      "Leon Banner, fondateur d'Edgio et day trader sur futures, écrit les articles de ce blog. Expérience, méthode d'écriture et politique éditoriale.",
     canonical: url,
     image: `${SITE}/og-image.png`,
     extra: `<script type="application/ld+json">\n${JSON.stringify(ld, null, 1)}\n</script>`,
@@ -484,7 +484,7 @@ function renderAuthor(posts) {
       <p class="chapeau">Un seul auteur, une seule source : mon propre journal de trading. Pas de contenu acheté, pas d'article signé par un pseudonyme.</p>
     </div>
     <div class="article-body">
-      <h2 id="noa-blenner">Noa Blenner</h2>
+      <h2 id="noa-blenner">Leon Banner</h2>
       <p>${esc(a.bio)}</p>
       <p>Je trade en intraday sur les futures indices et l'or, avec un risque fixe par trade et un stop de séance chiffré. Je suis passé par les mêmes étapes que la plupart des lecteurs de ce blog : des stratégies qui fonctionnaient en backtest et pas en réel, des journées à −6R après un stop à −1R, des mois passés à chercher un meilleur setup alors que le problème était ailleurs.</p>
       <p>Edgio est né de ce constat : mes pertes ne venaient pas de mes setups mais de ce que je faisais entre deux trades. J'ai commencé à noter le trader avant de noter les trades, et les croisements que j'ai obtenus sont devenus le produit.</p>
@@ -580,7 +580,7 @@ async function main() {
       continue;
     }
     p.slug = p.slug || slugify(path.basename(f, '.json'));
-    p.auteur = p.auteur || 'Noa Blenner';
+    p.auteur = p.auteur || 'Leon Banner';
 
     const missing = REQUIRED.filter((k) => !p[k]);
     if (missing.length) {

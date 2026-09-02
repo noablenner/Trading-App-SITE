@@ -37,7 +37,7 @@ const slugify = (s = '') =>
 
 const SYSTEM = `Tu écris les articles du blog d'Edgio (edgio.fr), un journal de trading axé
 psychologie et discipline, pour des scalpers et day traders francophones, dont beaucoup sont
-en challenge prop firm. L'auteur signataire est Noa Blenner, fondateur d'Edgio, qui trade les
+en challenge prop firm. L'auteur signataire est Leon Banner, fondateur d'Edgio, qui trade les
 futures indices et l'or en intraday depuis 2020. Tu écris à sa place, à la première personne
 quand c'est utile.
 
@@ -311,7 +311,7 @@ async function main() {
     chapeau: article.chapeau,
     date_publication: aujourdhui,
     date_maj: aujourdhui,
-    auteur: 'Noa Blenner',
+    auteur: 'Leon Banner',
     corps: article.corps.trim(),
     faq: article.faq,
     articles_lies: lies,
