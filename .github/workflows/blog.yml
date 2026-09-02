@@ -1,0 +1,65 @@
+name: Blog
+
+# Publication entièrement automatique : mardi et jeudi à 07h00 Paris, un article
+# est rédigé, contrôlé et mis en ligne sans intervention.
+#
+# Un push sur content/ ou sur les outils régénère simplement le rendu, sans
+# écrire de nouvel article — c'est ce qui permet de corriger un article à la
+# main ou de changer le design du blog.
+
+on:
+  schedule:
+    - cron: '0 5 * * 2,4'    # 07h00 Paris (heure d'été) — rédaction + publication
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'tools/**'
+      - 'assets/css/blog.css'
+  workflow_dispatch:
+    inputs:
+      ecrire:
+        description: "Rédiger un nouvel article (sinon, régénère seulement le rendu)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: blog
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm install --no-audit --no-fund
+
+      - name: Rédiger l'article du jour
+        if: github.event_name == 'schedule' || inputs.ecrire
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node tools/write-article.mjs
+
+      - name: Générer le blog
+        run: node tools/build-blog.mjs
+
+      - name: Publier
+        run: |
+          git config user.name  "edgio-blog-bot"
+          git config user.email "contact@edgio.fr"
+          git add blog sitemap.xml content
+          if git diff --cached --quiet; then
+            echo "Rien de nouveau à publier."
+            exit 0
+          fi
+          git commit -m "Blog : publication automatique"
+          git pull --rebase --autostash origin main
+          git push
