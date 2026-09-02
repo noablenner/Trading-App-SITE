@@ -1,13 +1,40 @@
 {
   "_comment": "File de sujets du blog. Le rédacteur prend le premier non publié, puis le retire. Quand elle se vide, elle est réalimentée automatiquement à partir de ce qui est déjà en ligne. Tu peux ajouter un sujet à la main en tête de liste pour le faire passer en priorité.",
   "sujets": [
-    { "mot_cle": "challenge prop firm reussir", "angle": "Ce qui fait échouer un challenge n'est presque jamais la stratégie mais la gestion du dernier jour et de la drawdown quotidienne. Décrire la mécanique et le protocole.", "categorie": "Prop firm" },
-    { "mot_cle": "overtrading", "angle": "Reconnaître l'overtrading pendant qu'on le fait, pas le soir. Les trois signaux physiques, et le plafond chiffré qui le rend impossible.", "categorie": "Discipline" },
-    { "mot_cle": "fomo trading", "angle": "Entrer en retard parce que le mouvement est déjà parti. Pourquoi le cerveau confond mouvement et opportunité, et la règle d'invalidation qui coupe court.", "categorie": "Psychologie" },
-    { "mot_cle": "check-list pre-seance trading", "angle": "Le contenu exact d'une check-list de cinq points qui tient en deux minutes, et pourquoi elle marche même quand elle n'apprend rien de nouveau.", "categorie": "Méthode" },
-    { "mot_cle": "couper ses gagnants trop tot", "angle": "La sortie prématurée est une gestion de l'inconfort, pas une gestion du risque. Comment séparer les deux et mesurer ce que ça coûte en R.", "categorie": "Psychologie" },
-    { "mot_cle": "drawdown journaliere prop firm", "angle": "La drawdown quotidienne est une contrainte de comportement déguisée en règle de compte. Comment structurer sa séance autour d'elle.", "categorie": "Prop firm" },
-    { "mot_cle": "playbook trading", "angle": "Construire un playbook de trois setups nommés, avec des critères d'entrée binaires, et s'en servir pour trancher en séance au lieu d'improviser.", "categorie": "Méthode" },
-    { "mot_cle": "peur d'entrer en position", "angle": "L'hésitation après une série de pertes : ce qui se passe réellement, et l'exposition graduée en taille réduite pour la casser.", "categorie": "Psychologie" }
+    {
+      "mot_cle": "overtrading",
+      "angle": "Reconnaître l'overtrading pendant qu'on le fait, pas le soir. Les trois signaux physiques, et le plafond chiffré qui le rend impossible.",
+      "categorie": "Discipline"
+    },
+    {
+      "mot_cle": "fomo trading",
+      "angle": "Entrer en retard parce que le mouvement est déjà parti. Pourquoi le cerveau confond mouvement et opportunité, et la règle d'invalidation qui coupe court.",
+      "categorie": "Psychologie"
+    },
+    {
+      "mot_cle": "check-list pre-seance trading",
+      "angle": "Le contenu exact d'une check-list de cinq points qui tient en deux minutes, et pourquoi elle marche même quand elle n'apprend rien de nouveau.",
+      "categorie": "Méthode"
+    },
+    {
+      "mot_cle": "couper ses gagnants trop tot",
+      "angle": "La sortie prématurée est une gestion de l'inconfort, pas une gestion du risque. Comment séparer les deux et mesurer ce que ça coûte en R.",
+      "categorie": "Psychologie"
+    },
+    {
+      "mot_cle": "drawdown journaliere prop firm",
+      "angle": "La drawdown quotidienne est une contrainte de comportement déguisée en règle de compte. Comment structurer sa séance autour d'elle.",
+      "categorie": "Prop firm"
+    },
+    {
+      "mot_cle": "playbook trading",
+      "angle": "Construire un playbook de trois setups nommés, avec des critères d'entrée binaires, et s'en servir pour trancher en séance au lieu d'improviser.",
+      "categorie": "Méthode"
+    },
+    {
+      "mot_cle": "peur d'entrer en position",
+      "angle": "L'hésitation après une série de pertes : ce qui se passe réellement, et l'exposition graduée en taille réduite pour la casser.",
+      "categorie": "Psychologie"
+    }
   ]
 }
