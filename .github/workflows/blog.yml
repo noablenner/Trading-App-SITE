@@ -38,9 +38,12 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - run: npm install --no-audit --no-fund
+
+      - name: Vérifications (schémas, contrôle qualité, plan)
+        run: node tools/check.mjs
 
       - name: Rédiger l'article du jour
         if: github.event_name == 'schedule' || inputs.ecrire

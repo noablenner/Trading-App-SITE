@@ -25,9 +25,9 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS = path.join(ROOT, 'content/posts');
 const PLAN = path.join(ROOT, 'content/plan.json');
-const MODEL = 'claude-sonnet-5';
+const MODEL = 'claude-opus-5';
 
-const CATEGORIES = ['Psychologie', 'Discipline', 'Journal de trading', 'Prop firm', 'Méthode'];
+export const CATEGORIES = ['Psychologie', 'Discipline', 'Journal de trading', 'Prop firm', 'Méthode'];
 
 const slugify = (s = '') =>
   s.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -77,7 +77,7 @@ Le mot-clé principal apparaît dans le titre, dans le premier paragraphe, et da
 maximum, toujours naturellement. Markdown autorisé : ##, ###, listes - et 1., **gras**,
 [lien](url), > citation, tableaux.`;
 
-const ArticleSchema = z.object({
+export const ArticleSchema = z.object({
   titre: z.string().describe('H1, 55 à 70 caractères, contient le mot-clé principal'),
   meta_title: z.string().describe('60 caractères maximum, se termine par " | Edgio"'),
   meta_description: z.string().describe('150 à 160 caractères, donne envie de cliquer sans rien promettre'),
@@ -90,6 +90,14 @@ const ArticleSchema = z.object({
     question: z.string(),
     reponse: z.string().describe('2 à 4 phrases autonomes, compréhensibles hors contexte'),
   })).describe('3 à 5 entrées'),
+});
+
+export const PlanSchema = z.object({
+  sujets: z.array(z.object({
+    mot_cle: z.string(),
+    angle: z.string(),
+    categorie: z.enum(CATEGORIES),
+  })),
 });
 
 /* --------------------------------------------------------- contrôle qualité */
@@ -180,13 +188,7 @@ async function rechargerPlan(client, publies) {
         `l'angle concret à traiter, et la catégorie parmi ${CATEGORIES.join(', ')}.`,
     }],
     output_config: {
-      format: zodOutputFormat(z.object({
-        sujets: z.array(z.object({
-          mot_cle: z.string(),
-          angle: z.string(),
-          categorie: z.enum(CATEGORIES),
-        })),
-      })),
+      format: zodOutputFormat(PlanSchema),
     },
   });
   const sujets = res.parsed_output?.sujets ?? [];
