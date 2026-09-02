@@ -25,7 +25,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS = path.join(ROOT, 'content/posts');
 const PLAN = path.join(ROOT, 'content/plan.json');
-const MODEL = 'claude-opus-5';
+const MODEL = 'claude-sonnet-5';
 
 export const CATEGORIES = ['Psychologie', 'Discipline', 'Journal de trading', 'Prop firm', 'Méthode'];
 
@@ -82,10 +82,16 @@ STYLE :
   présenté comme une façon de faire parmi d'autres. L'article doit rester entièrement utile
   pour quelqu'un qui ne l'utilisera jamais.
 
-STRUCTURE : 1500 à 1900 mots. 5 à 7 titres de niveau 2 (##), des ### seulement s'ils servent.
-Le mot-clé principal apparaît dans le titre, dans le premier paragraphe, et dans deux ## au
-maximum, toujours naturellement. Markdown autorisé : ##, ###, listes - et 1., **gras**,
-[lien](url), > citation, tableaux.`;
+STRUCTURE : 1000 à 1300 mots, pas plus. 4 à 5 titres de niveau 2 (##), des ### seulement
+s'ils servent vraiment. Le mot-clé principal apparaît dans le titre, dans le premier
+paragraphe, et dans un ou deux ## au maximum, toujours naturellement. Markdown autorisé :
+##, ###, listes - et 1., **gras**, [lien](url), > citation, tableaux.
+
+DENSITÉ. Ce format court ne s'obtient pas en survolant, mais en coupant. Chaque section
+apporte une idée que les autres n'ont pas. Supprime les transitions qui annoncent ce qui
+vient, les reformulations d'une idée déjà posée, et les exemples qui répètent le précédent.
+Une phrase qu'on peut retirer sans rien perdre doit être retirée. Mieux vaut quatre sections
+denses qu'un article complet mais dilué.`;
 
 export const ArticleSchema = z.object({
   titre: z.string().describe('H1, 55 à 70 caractères, contient le mot-clé principal'),
@@ -99,7 +105,7 @@ export const ArticleSchema = z.object({
   faq: z.array(z.object({
     question: z.string(),
     reponse: z.string().describe('2 à 4 phrases autonomes, compréhensibles hors contexte'),
-  })).describe('3 à 5 entrées'),
+  })).describe('3 à 4 entrées'),
 });
 
 export const PlanSchema = z.object({
@@ -128,7 +134,14 @@ function phraseAutour(texte, index) {
   return texte.slice(debut, fin + 1).trim();
 }
 
-export function controle(a, slugsExistants, motsClesExistants) {
+/**
+ * `options.format` à false ne vérifie que le fond (inventions, promesses) sans
+ * les bornes de longueur et de structure : celles-ci sont une préférence
+ * éditoriale du moment, et un article déjà en ligne ne devient pas fautif
+ * parce qu'on a resserré le format depuis.
+ */
+export function controle(a, slugsExistants, motsClesExistants, options = {}) {
+  const { format = true } = options;
   const p = [];
   const corps = a.corps || '';
   const mots = corps.split(/\s+/).length;
@@ -161,13 +174,15 @@ export function controle(a, slugsExistants, motsClesExistants) {
     if (m) p.push(`${quoi}, dans cette phrase : « ${phraseAutour(corps, m.index)} »`);
   }
 
-  // Forme.
-  if (mots < 1200) p.push(`article trop court (${mots} mots, minimum 1200)`);
-  if (mots > 2600) p.push(`article trop long (${mots} mots)`);
+  // Forme. Ces bornes n'ont de sens qu'à la rédaction.
+  if (!format) return { ok: p.length === 0, problemes: p, slug: slugify(a.mot_cle_principal || ''), mots };
+
+  if (mots < 850) p.push(`article trop court (${mots} mots, minimum 850)`);
+  if (mots > 1600) p.push(`article trop long (${mots} mots, maximum 1600)`);
   if (/^#\s/m.test(corps)) p.push('contient un titre de niveau 1');
   if (/<[a-z][^>]*>/i.test(corps)) p.push('contient du HTML');
   if (/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(corps)) p.push('contient des emoji');
-  if ((corps.match(/^##\s/gm) || []).length < 4) p.push('moins de 4 sections H2');
+  if ((corps.match(/^##\s/gm) || []).length < 3) p.push('moins de 3 sections H2');
   if (/^##\s*Conclusion\s*$/im.test(corps)) p.push('section « Conclusion »');
 
   const mentions = (corps.match(/\bEdgio\b/g) || []).length;
