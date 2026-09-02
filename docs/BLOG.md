@@ -10,7 +10,7 @@ Ajouter le secret **`ANTHROPIC_API_KEY`** dans
 et vérifier que *Settings → Actions → General → Workflow permissions* est sur
 **Read and write**.
 
-C'est tout. Coût : environ 0,10 € par article, soit moins d'un euro par mois.
+C'est tout. Coût : quelques centimes par article, soit moins d'un euro par mois.
 
 ## Ce qui se passe tout seul
 
