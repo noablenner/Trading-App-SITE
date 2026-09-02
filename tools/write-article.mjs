@@ -25,7 +25,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS = path.join(ROOT, 'content/posts');
 const PLAN = path.join(ROOT, 'content/plan.json');
-const MODEL = 'claude-opus-5';
+const MODEL = 'claude-sonnet-5';
 
 const CATEGORIES = ['Psychologie', 'Discipline', 'Journal de trading', 'Prop firm', 'Méthode'];
 
