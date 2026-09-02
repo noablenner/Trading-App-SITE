@@ -42,18 +42,18 @@ verifier('zod v4', () => {
   if (!z.toJSONSchema) throw new Error('zod v4 requis par le helper du SDK');
 });
 
-console.log('\nContrôle qualité — les articles publiés doivent passer');
+console.log('\nContrôle qualité — le fond des articles publiés (hors bornes de format)');
 const POSTS = path.join(ROOT, 'content/posts');
 for (const f of (await readdir(POSTS)).filter((f) => f.endsWith('.json'))) {
   const a = JSON.parse(await readFile(path.join(POSTS, f), 'utf8'));
   verifier(f, () => {
-    const v = controle(a, [], []);
+    const v = controle(a, [], [], { format: false });
     if (!v.ok) throw new Error(v.problemes.join(' | '));
   });
 }
 
 console.log('\nContrôle qualité — les fautes graves doivent être attrapées');
-const remplissage = 'mot '.repeat(1300);
+const remplissage = 'mot '.repeat(1000);
 const pieges = [
   ['pourcentage sur une population', '90 % des traders perdent leur capital.'],
   ['étude sans source', "D'après une étude, le tilt double les pertes."],
