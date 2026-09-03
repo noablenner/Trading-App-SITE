@@ -6,7 +6,15 @@
 <atom:link href="https://edgio.fr/blog/feed.xml" rel="self" type="application/rss+xml"/>
 <description>Articles de fond sur la psychologie du trader, la discipline d'exécution et le journal de trading.</description>
 <language>fr-FR</language>
-<lastBuildDate>Wed, 02 Sep 2026 08:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 03 Sep 2026 08:00:00 GMT</lastBuildDate>
+<item>
+<title>Overtrading : reconnaître les signaux pendant que tu trades encore</title>
+<link>https://edgio.fr/blog/posts/overtrading.html</link>
+<guid isPermaLink="true">https://edgio.fr/blog/posts/overtrading.html</guid>
+<pubDate>Thu, 03 Sep 2026 08:00:00 GMT</pubDate>
+<category>Discipline</category>
+<description>Ton sixième trade de la matinée vient de se fermer, encore en perte, et ta main est déjà sur le clavier pour ouvrir le septième. Tu ne t'es pas dit consciemment que tu allais overtrader ce jour-là. C'est justement ça, le problème.</description>
+</item>
 <item>
 <title>Revenge trading : pourquoi tu rachètes après une perte, et comment l'arrêter</title>
 <link>https://edgio.fr/blog/posts/revenge-trading.html</link>
