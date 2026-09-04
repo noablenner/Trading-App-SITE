@@ -406,6 +406,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;l
 .stat{text-align:center}
 .stat .val{font-family:var(--font-display);font-weight:800;font-size:clamp(2.4rem,5vw,3.4rem);background:var(--grad-soft);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em}
 .stat .lbl{color:var(--dim);font-size:.9rem;margin-top:4px}
+.stat .val svg.trend-ic{width:.78em;height:.78em;color:var(--green);vertical-align:-.06em}
 
 /* ---------- Curseur bougie (chandelier) ---------- */
 /* Activé par JS (classe sur <html>) uniquement en pointeur fin + motion OK ;
@@ -457,11 +458,11 @@ html.candle-cursor *{cursor:none!important}
   .hero-badge{margin:0 auto}
   .hero-visual{order:-1;min-height:auto;margin:4px 0 20px}
   .eyebrow{justify-content:center}
-  .cine-pin{flex-direction:column;justify-content:center;padding:32px 0}
-  .cine-inner{grid-template-columns:1fr;gap:14px}
-  .cine-phone-wrap{order:1}
+  .cine-pin{flex-direction:column;justify-content:center;padding:12px 0 32px}
+  .cine-inner{grid-template-columns:1fr;gap:6px}
+  .cine-phone-wrap{order:1;margin-top:-18px}
   .cine-copy{order:2;min-height:230px;text-align:center}
-  .cine-phone{width:110px}
+  .cine-phone{width:158px;padding:7px;border-radius:19px}
   .cine-state{align-items:center}
   .cine-state h3{font-size:1.4rem}
   .cine-state p{margin:0 auto;font-size:.92rem}
@@ -514,6 +515,11 @@ html.candle-cursor *{cursor:none!important}
 .pitch-copy .kicker{
   margin-top:28px;padding-left:18px;border-left:2px solid var(--accent);
   color:var(--txt);font-weight:600;font-size:1.05rem;
+}
+.pitch-copy .tags{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 8px}
+.pitch-copy .tags span{
+  padding:7px 14px;border-radius:100px;font-size:.85rem;font-weight:600;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--dim);
 }
 
 .vs{
