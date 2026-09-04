@@ -406,6 +406,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;l
 .stat{text-align:center}
 .stat .val{font-family:var(--font-display);font-weight:800;font-size:clamp(2.4rem,5vw,3.4rem);background:var(--grad-soft);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em}
 .stat .lbl{color:var(--dim);font-size:.9rem;margin-top:4px}
+.stat .val svg.trend-ic{width:.78em;height:.78em;color:var(--green);vertical-align:-.06em}
 
 /* ---------- Curseur bougie (chandelier) ---------- */
 /* Activé par JS (classe sur <html>) uniquement en pointeur fin + motion OK ;
