@@ -457,11 +457,11 @@ html.candle-cursor *{cursor:none!important}
   .hero-badge{margin:0 auto}
   .hero-visual{order:-1;min-height:auto;margin:4px 0 20px}
   .eyebrow{justify-content:center}
-  .cine-pin{flex-direction:column;justify-content:center;padding:32px 0}
-  .cine-inner{grid-template-columns:1fr;gap:14px}
-  .cine-phone-wrap{order:1}
+  .cine-pin{flex-direction:column;justify-content:center;padding:12px 0 32px}
+  .cine-inner{grid-template-columns:1fr;gap:6px}
+  .cine-phone-wrap{order:1;margin-top:-18px}
   .cine-copy{order:2;min-height:230px;text-align:center}
-  .cine-phone{width:110px}
+  .cine-phone{width:158px;padding:7px;border-radius:19px}
   .cine-state{align-items:center}
   .cine-state h3{font-size:1.4rem}
   .cine-state p{margin:0 auto;font-size:.92rem}
